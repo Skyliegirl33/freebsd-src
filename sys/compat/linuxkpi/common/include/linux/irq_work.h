@@ -39,6 +39,9 @@ typedef void (*irq_work_func_t)(struct irq_work *);
 
 struct irq_work {
 	struct task irq_task;
+	struct {
+		struct llist_node llist;
+	} node;
 	irq_work_func_t func;
 };
 
