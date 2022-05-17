@@ -245,7 +245,9 @@ lkpi_i2c_bit_add_bus(struct i2c_adapter *adapter)
 		return (ENXIO);
 	}
 
+	bus_topo_lock();
 	error = bus_generic_attach(adapter->dev.parent->bsddev);
+	bus_topo_unlock();
 	if (error) {
 		device_printf(adapter->dev.parent->bsddev,
 		  "failed to attach child: error %d\n", error);
